@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.mitsubishielectric.ada.permission.VEHICLE_RW" />
+
+    <application
+        android:name=".MyApp"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme">
+        
+        <uses-library android:name="com.mitsubishielectric.ada.appservice.strgsw.lib"
+            android:required="false" />
+        <uses-library android:name="com.mitsubishielectric.ada.appservice.powermanager.lib"
+            android:required="false" />
+
+        <service
+            android:name=".Service.StrgSWListenerService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <activity
+            android:name=".Activity.MapInputActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BluetoothApMapSettingActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".Service.BTConnectListenerService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Service.MeterService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".Receiver.MyBroadcastReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED" />
+                <action android:name="com.mitsubishielectric.ada.appservice.powermanager.ACTION_HMI_SERVICE_START" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
